@@ -37,6 +37,14 @@ public int Fetch(int num){
    return -1;
  
  }
+
+public void intercambio(int i,int j){
+    
+    int temp = vector[j];
+    vector[j] = vector[i];
+    vector[i] = temp;
+    
+}
  
 
    @Override
@@ -49,13 +57,73 @@ public int Fetch(int num){
                     menor=j;
                 }
             }
-            if(i != menor){
             aux=vector[i];
             vector[i]=vector[menor];
             vector[menor]=aux;
+        
+    }
+    }
+
+    @Override
+    public void insercion() {
+      for(int i=1; i < vector.length; i++){
+          int temp = vector[i];
+          int j=i-1;
+          
+       while((j>=0) && (vector[j]> temp)){
+           vector[j+1] = vector[j];
+           j--;
+           
+           
+       }
+       vector[j+1] = temp;
+      }
+    }
+
+    @Override
+    public void burbuja(){
+            for (int i=1; i< vector.length; i++){
+	for(int j=0; j<vector.length-1; j++){
+        if(vector[j]> vector[j+1]){
+            intercambio(j,j+1);     
+        }
+            }
+    }
+ }
+
+   public void mergeSort(int inicio, int fin){
+        int i= inicio;
+        int j= fin;
+        int centro;
+        
+        
+        centro= vector[(i+j)/2];
+        do{
+            while(vector[i]<centro)
+            {
+                i++;
+            }
+             while(vector[j]<centro)
+            {
+                j--;
+            }
+            if(i<=j)
+            {
+                intercambio(i,j);
+                i++;j--;
+            }
+        }
+        
+        while(i<=j);
+        if(inicio<j){
+            mergeSort(inicio, j);
+        }
+        if(i < fin){
+            mergeSort(i, fin);
         }
     }
-    }
+
+   
 }
 
  
